@@ -28,6 +28,8 @@ import Toolbar_Styles_Preferences as tsp
 mw = Gui.getMainWindow()
 p = App.ParamGet("User parameter:BaseApp/ToolbarStyle")
 
+exclude = ["Selector"]
+
 
 def accessoriesMenu():
     """Add toolbar style preferences to accessories menu."""
@@ -79,8 +81,9 @@ def onWorkbench():
     else:
         mode = QtCore.Qt.ToolButtonIconOnly
 
-    for t in mw.findChildren(QtGui.QToolBar):
-        t.setToolButtonStyle(mode)
+    for tb in mw.findChildren(QtGui.QToolBar):
+        if tb.objectName() not in exclude:
+            tb.setToolButtonStyle(mode)
 
 
 def onStart():
